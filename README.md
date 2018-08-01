@@ -1,5 +1,7 @@
-# WP SVG: Working with Scalable Vector Graphics in WordPress
+# Making Images Smarter
 
-### [View the slides](http://kingkool68.com/wp-svg/) ###
+Dynamic Image Manipulation Infrastructure for WordPress
 
-Presented October 15th at [WordCamp Baltimore 2017](https://2017.baltimore.wordcamp.org/session/wp-svg-working-with-svgs-in-wordpress/)
+### [View the slides](http://kingkool68.com/making-images-smarter/) ###
+
+Presented August 9th at [WordCamp for Publishers: Chicago](https://2018-chicago.publishers.wordcamp.org/session/thursday-lightning-talks/)
