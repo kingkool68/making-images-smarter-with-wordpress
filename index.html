@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Making Images Smarter: Dynamic Image Manipulation Infrastructure for WordPress</title>
+
+		<meta name="description" content="Slides from my 2018 WordCamp for Publishers (Chicago) lightning talk about making images dynamic in WordPress.">
+		<meta name="author" content="Russell Heimlich">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="css/overrides.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/mono-blue.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Making Images Smarter</h2>
+					<p>Dynamic Image Manipulation Infrastructure for WordPress</p>
+					<p><a href="https://v.gd/wpsvg" target="_blank">v.gd/wpsvg</a></p>
+				</section>
+				<section>
+					<h1>About Me</h1>
+				</section>
+				<section>
+					<p>Russell Heimlich</p>
+					<img src="img/russell-and-zadie-in-car.jpg" style="max-width: 580px;">
+				</section>
+				<section>
+					<p>Lead Developer at Spirited Media</p>
+					<a href="https://billypenn.com" target="_blank">
+						<img src="img/billy-penn-logo.svg" style="max-width: 540px;" class="no-border">
+					</a>
+					<a href="https://theincline.com" target="_blank">
+						<img src="img/the-incline-logo.svg" style="max-width: 540px;" class="no-border">
+					</a>
+					<a href="https://denverite.com" target="_blank">
+						<img src="img/denverite-logo.svg" style="max-width: 540px;" class="no-border">
+					</a>
+				</section>
+				<section>
+					(pictures of happy Spirited Media employees)
+				</section>
+				<section>
+					<h1>The Problem</h1>
+				</section>
+				<section data-background-image="img/under-construction.gif">
+				</section>
+				<section
+					data-background-image="img/regenerate-thumbnails-plugin.png"
+					data-background-size="contain"
+				>
+				</section>
+				<section
+					data-background-image="img/homer-and-now-we-wait.webp"
+					data-background-size="contain"
+				>
+				</section>
+				<section
+					data-background-image="img/3-days-later.jpg"
+					data-background-size="contain"
+				>
+				</section>
+				<section
+					data-background-image="img/aint-nobody-got-time-for-that.webp"
+					data-background-size="contain"
+				>
+				</section>
+				<section>
+					<h2>Why do properly sized images matter?</h2>
+				</section>
+				<section>
+					<div class="tweet" data-src="https://twitter.com/xbs/status/626781529054834688"></div>
+				</section>
+				<section>
+					<p>Serving the right-sized image for a given screen:</p>
+					<ul>
+						<li class="fragment">Decreases bandwidth</li>
+						<li class="fragment">Decreases download time</li>
+						<li class="fragment">Less CPU power</li>
+						<li class="fragment">Faster page load times</li>
+						<li class="fragment">Happier Readers</li>
+					</ul>
+				</section>
+				<section>
+					<h1>The Solution</h1>
+				</section>
+				<section>
+					<h2>Commercial Services?</h2>
+					<div style="display: flex; align-items: center; justify-content: center;">
+						<a href="https://cloudinary.com/" target="_blank" style="display: block; width: 50%;">
+							<img src="img/cloudinary-logo.svg" class="no-border">
+						</a>
+						<a href="https://www.imgix.com/" target="_blank" style="display: block; width: 50%;">
+							<img src="img/imgix-logo.svg" class="no-border">
+						</a>
+					</div>
+				</section>
+				<section>
+					<h2>Free Services?</h2>
+					<a href="https://jetpack.com/support/image-cdn/" target="_blank">
+						<img src="img/jetpack-logo.svg" class="no-border">
+					</a>
+					<p>Image CDN (formerly Photon)</p>
+				</section>
+				<section>
+					<h2>Open Source?</h2>
+					<a href="https://engineering.hmn.md/projects/tachyon/" target="_blank">
+						<img src="img/human-made-logo.svg" class="no-border">
+					</a>
+					<p>Tachyon</p>
+				</section>
+				<section>
+					<h2>Tachyon@Edge</h2>
+					<img src="img/code-fork-icon.svg" class="no-border">
+					<p class="fragment">(Our fork)</p>
+				</section>
+				<section
+					data-background-color="#ffffff"
+					data-background-image="img/tachyon-edge-diagram.png"
+					data-background-size="contain"
+				>
+				</section>
+				<section>
+					<h2>Original</h2>
+					<a href="https://a.spirited.media/wp-content/uploads/sites/3/2016/10/russell-square-pref.jpg" target="_blank">
+						<img src="img/original-image.jpg" style="max-width: 540px;">
+					</a>
+				</section>
+				<section>
+					<h2>Transformed</h2>
+					<pre><code>?resize=300,600&flop=1&flip=1&negative=1</code></pre>
+					<a href="https://a.spirited.media/wp-content/uploads/sites/3/2016/10/russell-square-pref.jpg?resize=300,600&flop=1&flip=1&negative=1" target="_blank">
+						<img src="img/manipulated-image.jpg" style="max-height: 400px;">
+					</a>
+				</section>
+				<section>
+					<h2>Unlimited srcset options</h2>
+					<pre><code>&lt;img src="image.jpg?resize=942,530"
+  sizes="(max-width: 584px) 100vw, (min-width: 1025px) 640px, 92vw"
+  srcset="
+    image.jpg?resize=308,173 308w,
+    image.jpg?resize=616,346 616w,
+    image.jpg?resize=924,519 924w,
+    image.jpg?resize=320,180 320w,
+    image.jpg?resize=640,360 640w,
+    image.jpg?resize=960,540 960w,
+    image.jpg?resize=480,270 480w,
+    image.jpg?resize=800,450 800w,
+    image.jpg?resize=1024,576 1024w"
+&gt;</code></pre>
+				</section>
+				<section
+					data-background-color="#ffffff"
+					data-background-image="img/denverite-image-weight-chart.jpg"
+					data-background-size="contain"
+				>
+				</section>
+				<section>
+					<h2>Tachyon@Edge is Open Source</h2>
+					<p>
+						<a href="https://github.com/spiritedmedia/tachyon-edge/" target="_blank">
+							https://github.com/spiritedmedia/tachyon-edge/
+						</a>
+					</p>
+				</section>
+				<section>
+					<h1>Thank You!</h1>
+					<p class="tweet-me"><a href="https://twitter.com/kingkool68"><img src="img/twitter-logo.svg" class="no-border" alt="Tweet me!"> @kingkool68</a></p>
+					<h2 class="fragment">Questions?</h2>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'reveal.js/plugin/embed-tweet/embed-tweet.js' },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
